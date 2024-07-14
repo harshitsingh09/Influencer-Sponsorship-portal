@@ -17,15 +17,15 @@
             <div id="input-form">
                 <br>
                 <h2>Login page</h2>
-                <form>
+                <form method="post" action="/login"> <!-- action should come before method -->
                     <div class="mb-3">
                         <label for="username" class="form-label">username</label>
-                        <input type="text" class="form-control" id="username" aria-describedby="userHelp">
+                        <input type="text" name="uname" class="form-control" id="username" aria-describedby="userHelp">
                         <div id="username" class="form-text">We'll never share your username with anyone else.</div>
                     </div>
                     <div class="mb-3">
                         <label for="pwd" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                        <input type="password" name="pwd" class="form-control" id="exampleInputPassword1">
                     </div>
                     <button type="submit" class="btn btn-primary">Login</button>
                     New user? <a href="/signup">Signup</a>
