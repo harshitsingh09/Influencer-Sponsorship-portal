@@ -17,23 +17,23 @@
             <div id="input-form">
                 <br>
                 <h2>Signup page</h2>
-                <form>
+                <form method="post" action="/signup">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                        <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
                     <div class="mb-3">
                         <label for="fullname" class="form-label">Full name</label>
-                        <input type="text" class="form-control" id="fullname">
+                        <input type="text" name="fullname" class="form-control" id="fullname">
                     </div>
                     <div class="mb-3">
                         <label for="username" class="form-label">User name</label>
-                        <input type="text" class="form-control" id="username">
+                        <input type="text" name="uname" class="form-control" id="username">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password">
+                        <input type="password" name="pwd" class="form-control" id="password">
                     </div>
                     <button type="submit" class="btn btn-primary">Register</button>
                     Already have an account? <a href="/login">Login</a>
