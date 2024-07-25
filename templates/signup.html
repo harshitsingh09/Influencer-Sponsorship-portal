@@ -16,8 +16,8 @@
         <div id="panel">
             <div id="input-form">
                 <br>
-                <h2>Signup page</h2>
-                <form method="post" action="/signup">
+                <h2>Signup</h2>
+                <form action="/signup" method="post">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
@@ -25,18 +25,24 @@
                     </div>
                     <div class="mb-3">
                         <label for="fullname" class="form-label">Full name</label>
-                        <input type="text" name="fullname" class="form-control" id="fullname">
+                        <input type="text" class="form-control" name="fullname" id="fullname">
                     </div>
                     <div class="mb-3">
                         <label for="username" class="form-label">User name</label>
-                        <input type="text" name="uname" class="form-control" id="username">
+                        <input type="text" class="form-control" name="uname" id="username" aria-describedby="userHelp">
+                        <div id="userHelp" class="form-text">We'll never share your username with anyone else.</div>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" name="pwd" class="form-control" id="password">
+                        <input type="password" class="form-control" name="pwd" id="password"
+                            aria-describedby="userHelp">
+                        <div id="userHelp" class="form-text">We'll never share your password with anyone else.</div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Register</button>
-                    Already have an account? <a href="/login">Login</a>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                        Already have an account? <a href="/login">Login</a>
+                        <br> {{msg}}
+                    </div>
                 </form>
             </div>
         </div>

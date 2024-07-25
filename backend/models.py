@@ -11,6 +11,24 @@ class User(db.Model):
     password = db.Column(db.String(100), nullable=False)
     role = db.Column(db.String(100), nullable=False, default=1)
 
+class List(db.Model):
+    __tablename__ = 'list'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(100), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    
+class Card(db.Model):
+    __tablename__ = 'card'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    content = db.Column(db.String(100), nullable=False)
+    created_date = db.Column(db.Date, nullable=False)
+    last_updated_date = db.Column(db.Date, nullable=False)
+    deadline_date = db.Column(db.Date, nullable=False)
+    status = db.Column(db.String(100), nullable=False, default=0)
+    list_id = db.Column(db.Integer, db.ForeignKey("list.id"), nullable=False)
+
 # class Sponsor(db.Model):
 #     __tablename__ = 'sponsor' # Table name
 #     id = db.Column(db.Integer, primary_key=True)
