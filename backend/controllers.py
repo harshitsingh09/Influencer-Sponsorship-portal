@@ -15,7 +15,8 @@ def user_login():
 
         usr = User.query.filter_by(username=uname, password=pwd).first()
         if usr and usr.role == "0":
-            return render_template("adminDashboard.html", admin=usr.username)
+            user_summary = fetch_users()
+            return render_template("adminDashboard.html", admin=usr.username, users=user_summary)
         elif usr and usr.role == "1":
             return render_template("sponsorDashboard.html", sponsor=usr.username)
         elif usr and usr.role == "2":
@@ -45,3 +46,12 @@ def user_signup():
         else:
             return render_template("signup.html", msg="User already exists, Kindly register again!")
     return render_template("signup.html")
+
+# UDF for fetching all general users
+def fetch_users():
+    users = User.query.filter_by(role="1").all()
+    user_list = {}
+    for user in users:
+        if user not in user_list.keys():
+            user_list[user.id] = [user.username, len(user.lists)]
+    return user_list

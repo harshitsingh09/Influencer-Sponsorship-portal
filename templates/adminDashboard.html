@@ -28,6 +28,7 @@
                 </div>
             </nav>
             <!-- Table here -->
+            {%if users%}
             <table class="table">
                 <thead>
                     <tr class="table-dark">
@@ -38,28 +39,20 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {%for key,value in users.items()%}
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
+                        <th scope="row">{{key}}</th>
+                        <td>{{value[0]}}</td>
+                        <td>{{value[1]}}</td>
                         <td><button type="button" class="btn btn-outline-success">New list</button>. .<button
                                 type="button" class="btn btn-danger">New list</button></td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td><button type="button" class="btn btn-outline-success">New list</button>. .<button
-                                type="button" class="btn btn-danger">New list</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td><button type="button" class="btn btn-outline-success">New list</button>. .<button
-                                type="button" class="btn btn-danger">New list</button></td>
-                    </tr>
+                    {%endfor%}
                 </tbody>
             </table>
+            {%else%}
+            <h3>No users found</h3>
+            {%endif%}
         </div>
     </div>
 </body>
