@@ -18,7 +18,9 @@ def user_login():
             user_summary = fetch_users()
             return render_template("adminDashboard.html", admin=usr.username, users=user_summary)
         elif usr and usr.role == "1":
-            return render_template("sponsorDashboard.html", sponsor=usr.username)
+            user_info = fetch_info(usr.id)
+            user_lists = user_info.lists
+            return render_template("sponsorDashboard.html", id=user_info.id, name=user_info.username, sponsor=usr.username, lists=user_lists)
         elif usr and usr.role == "2":
             return render_template("influencerDashboard.html", influencer=usr.username)
         else:
@@ -47,6 +49,34 @@ def user_signup():
             return render_template("signup.html", msg="User already exists, Kindly register again!")
     return render_template("signup.html")
 
+@app.route("/list/add/<int:user_id>", methods=["GET","POST"]) # ADD LIST URL
+def add_list(user_id):
+    if request.method == "POST":
+        title = request.form.get("title")
+        desc = request.form.get("description")
+        list_obj = List(title=title, description=desc, user_id=user_id)
+        db.session.add(list_obj)
+        db.session.commit()
+        user_info = fetch_info(user_id)
+        return render_template("sponsorDashboard.html", id=user_info.id, name=user_info.username, lists=user_info.lists)
+
+@app.route("/list/edit/<int:user_id>/<int:list_id>", methods=["GET","POST"]) # EDIT LIST URL
+def edit_list(user_id, list_id):
+    if request.method == "POST":
+        new_title = request.form.get("title")
+        new_desc = request.form.get("description")
+        list_obj = List.query.filter_by(id=list_id).first()
+        list_obj.title = new_title
+        list_obj.description = new_desc
+        db.session.commit()
+        user_info = fetch_info(list_obj.user_id)
+        return render_template("sponsorDashboard.html", id=user_info.id, name=user_info.username, lists=user_info.lists)
+
+@app.route("/list/delete/<int:list_id>", methods=["GET","POST"]) # DELETE LIST URL
+def delete_list(list_id):
+    if request.method == "POST":
+        pass
+
 # UDF for fetching all general users
 def fetch_users():
     users = User.query.filter_by(role="1").all()
@@ -55,3 +85,8 @@ def fetch_users():
         if user not in user_list.keys():
             user_list[user.id] = [user.username, len(user.lists)]
     return user_list
+
+# UDF for fetching user info
+def fetch_info(user_id):
+    user_info = User.query.filter_by(id=user_id).first()
+    return user_info
