@@ -1,1 +1,1 @@
-# Infulencer-Sponsorship-portal
+# Influencer-Sponsorship-portal
